@@ -1,0 +1,28 @@
+@mixin flexContainer($flexdirection, $alignitems, $justifycontent) {
+    display: flex;
+    flex-direction: $flexdirection;
+    align-items: $alignitems;
+    justify-content: $justifycontent;
+  }
+  
+  @mixin noborderoutline() {
+    border: none;
+    border-radius: 0;
+    outline: none;
+  }
+  
+  @mixin borderoutline($border, $border-radius, $outline) {
+    border: $border;
+    border-radius: $border-radius;
+    outline: $outline;
+  }
+  
+  @mixin hw($height, $width) {
+    height: $height;
+    width: $width;
+  }
+  
+  @mixin paddingmargin($padding, $margin) {
+    padding: $padding;
+    margin: $margin;
+  }

@@ -1,0 +1,5 @@
+.home {
+  &__data {
+    @include flexContainer(column, center, center);
+  }
+}

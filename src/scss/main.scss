@@ -1,0 +1,18 @@
+@import "./mixin";
+@import "./home";
+@import "./list";
+@import "./detail";
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a{
+    text-decoration: none;
+}

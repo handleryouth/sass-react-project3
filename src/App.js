@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
+import data from "./components/data";
+import Detail from "./components/Detail";
+import "./scss/main.scss";
 
-function App() {
+export default function App() {
+  const [list, setList] = useState(data);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <aside>
+
+      </aside>
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => <Home list={list} />}
+          />
+          <Route
+            path="/invoice/:id"
+            component={() => <Detail list={list} setList={setList} />}
+          ></Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
-
-export default App;

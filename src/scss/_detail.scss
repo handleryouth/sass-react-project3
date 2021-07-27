@@ -1,0 +1,23 @@
+.detail {
+  width: 45rem;
+  margin: 0 auto;
+  a {
+    color: black;
+  }
+  &__back {
+    @include flexContainer(row, center, flex-start);
+    img {
+      margin-right: 2rem;
+    }
+  }
+  &__command {
+    @include flexContainer(row, center, space-between);
+    &--status {
+      @include flexContainer(row, center, initial);
+      flex-basis: 20%;
+      &--description {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

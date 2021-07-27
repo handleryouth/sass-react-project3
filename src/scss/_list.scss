@@ -1,0 +1,10 @@
+.list__link__button{
+    width: clamp(35rem, 56vw, 50rem);
+    height: 5rem;
+    @include noborderoutline();
+    border-radius: 5px;
+    @include flexContainer(row, center,space-around);
+    background-color: yellowgreen;
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
