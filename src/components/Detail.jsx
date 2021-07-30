@@ -18,9 +18,9 @@ export default function Detail({ list, setList }) {
 
   return selectedData.map((i) => {
     return (
-      <div key={uuidv4()} className="detail">
+      <div key={i.id} className="detail">
         <aside>
-          <Edit {...i} title="Edit" setList={setList} />
+          <Edit {...i} key={i.id} title="Edit" setList={setList} />
         </aside>
 
         <Link to="/">
@@ -130,7 +130,12 @@ export default function Detail({ list, setList }) {
                 <td>Amount Due</td>
                 <td></td>
                 <td></td>
-                <td>£{i.total}</td>
+                <td>
+                  £
+                  {i.items.reduce((count, item) => {
+                    return item.total + count;
+                  }, 0)}
+                </td>
               </tr>
             </tfoot>
           </table>

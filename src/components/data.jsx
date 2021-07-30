@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 const data = [
   {
     id: "RT3080",
@@ -22,6 +23,7 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "Brand Guidelines",
         quantity: 1,
         price: 1800.9,
@@ -53,12 +55,14 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "Banner Design",
         quantity: 1,
         price: 156.0,
         total: 156.0,
       },
       {
+        id: uuidv4(),
         name: "Email Design",
         quantity: 2,
         price: 200.0,
@@ -90,6 +94,7 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "Website Redesign",
         quantity: 1,
         price: 14002.33,
@@ -121,6 +126,7 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "Logo Sketches",
         quantity: 1,
         price: 102.04,
@@ -152,12 +158,14 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "New Logo",
         quantity: 1,
         price: 1532.33,
         total: 1532.33,
       },
       {
+        id: uuidv4(),
         name: "Brand Guidelines",
         quantity: 1,
         price: 2500.0,
@@ -189,6 +197,7 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "Web Design",
         quantity: 1,
         price: 6155.91,
@@ -220,6 +229,7 @@ const data = [
     },
     items: [
       {
+        id: uuidv4(),
         name: "Logo Re-design",
         quantity: 1,
         price: 3102.04,

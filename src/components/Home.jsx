@@ -1,10 +1,11 @@
 import { useState, useMemo } from "react";
-import {v4 as uuidv4} from "uuid"
 import List from "./List";
 import Checkbox from "./Checkbox";
+import Create from "./Create";
 
-export default function Home({ list }) {
+export default function Home({ list, setList }) {
   const [filter, setFilter] = useState("");
+  const [create, setCreate] = useState(false);
 
   const paidStatus = list.filter((i) => i.status === "paid");
   const pendingStatus = list.filter((i) => i.status === "pending");
@@ -14,6 +15,10 @@ export default function Home({ list }) {
 
   return (
     <div className="home">
+      <aside style={create ? {display :"block"} : {display: "none"}}>
+        <Create list={list} setList={setList} />
+      </aside>
+
       <div className="home__title">
         <div>
           <h1>Invoices</h1>
@@ -54,9 +59,9 @@ export default function Home({ list }) {
           </div>
 
           <div>
-            <button>
+            <button onClick={() => setCreate(true)}>
               <span>+</span>
-              New Office
+              New Invoice
             </button>
           </div>
         </div>
@@ -64,12 +69,12 @@ export default function Home({ list }) {
 
       <div className="home__data">
         {filter === "paid"
-          ? paidStatus.map((i) => <List {...i} key={uuidv4()} />)
+          ? paidStatus.map((i) => <List {...i} key={i.id} />)
           : filter === "pending"
-          ? pendingStatus.map((i) => <List {...i} key={uuidv4()} />)
+          ? pendingStatus.map((i) => <List {...i} key={i.id} />)
           : filter === "draft"
-          ? draftStatus.map((i) => <List {...i} key={uuidv4()} />)
-          : list.map((i) => <List {...i} key={uuidv4()} />)}
+          ? draftStatus.map((i) => <List {...i} key={i.id} />)
+          : list.map((i) => <List {...i} key={i.id} />)}
       </div>
     </div>
   );

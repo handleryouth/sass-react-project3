@@ -10,19 +10,12 @@ export default function App() {
 
   return (
     <div>
-      <aside>
-
-      </aside>
       <Router>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <Home list={list} />}
-          />
+          <Route exact path="/" render={() => <Home list={list} setList={setList}/>} />
           <Route
             path="/invoice/:id"
-            component={() => <Detail list={list} setList={setList} />}
+            render={() => <Detail list={list} setList={setList} />}
           ></Route>
         </Switch>
       </Router>
