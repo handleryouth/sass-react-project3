@@ -12,11 +12,141 @@
   }
   &__command {
     @include flexContainer(row, center, space-between);
-    &--status {
+    padding: 2rem 1rem;
+    box-shadow: -2px -1px 13px -1px rgba(0, 0, 0, 0.54);
+    &__status {
       @include flexContainer(row, center, initial);
       flex-basis: 20%;
-      &--description {
+      &__container {
         margin-left: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: yellow;
+        border-radius: 5px;
+        width: 7rem;
+        height: 2.5rem;
+        padding: 0 0.5rem;
+        &-pending {
+          background-color: rgba(255, 143, 0, 0.2);
+          color:rgb(255, 143, 0) ;
+        }
+        &-paid {
+          background-color: rgba(51, 214, 159, 0.2);
+          color: rgb(51, 214, 159);
+        }
+
+        &--bullet {
+          width: 0.5rem;
+          height: 0.5rem;
+          background-color: red;
+          border-radius: 100%;
+          &-paid {
+            background-color: rgb(51, 214, 159);
+          }
+          &-pending {
+            background-color: rgb(255, 143, 0);
+          }
+        }
+        &--description {
+          margin-left: 1rem;
+        }
+      }
+    }
+
+    &__array {
+      position: relative;
+      &__edit,
+      &__delete,
+      &__mark {
+        @include noborderoutline;
+        height: 2.5rem;
+        width: 5.5rem;
+        border-radius: 2rem;
+        cursor: pointer;
+        margin: 0 0.5rem;
+      }
+
+      &__mark,
+      &__delete {
+        color: white;
+      }
+
+      &__mark {
+        width: 8rem;
+        background-color: rgb(124, 93, 250);
+      }
+
+      &__delete {
+        background-color: rgb(236, 87, 87);
+      }
+      &__confirmation {
+        position: fixed;
+        background-color: white;
+        padding: 2rem;
+        width: 30rem;
+        left: 33vw;
+        top: 15vw;
+        z-index: 1;
+      }
+    }
+  }
+
+  &__info {
+    display: grid;
+    background-color: white;
+    padding: 2rem;
+    box-shadow: -2px -1px 13px -1px rgba(0, 0, 0, 0.54);
+    margin: 2rem 0;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 1rem;
+    column-gap: 1rem;
+    &__grid-1-1 {
+      grid-column: 1/2;
+      grid-row: 1;
+    }
+    &__grid-1-2 {
+      grid-column: 3;
+      grid-row: 1;
+    }
+    &__grid-2-1 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    &__grid-3-1 {
+      grid-column: 1;
+      grid-row: 3;
+    }
+
+    &__grid-2-2 {
+      grid-column: 2;
+      grid-row: 2/4;
+    }
+
+    &__grid-2-3 {
+      grid-column: 3;
+      grid-row: 2/4;
+    }
+    &__grid-4-full {
+      grid-column: 1/5;
+      grid-row: 4;
+      margin-top: 4rem;
+      border-radius: 5px;
+      overflow: hidden;
+      border-collapse: collapse;
+      td,
+      th {
+        text-align: left;
+        height: 2rem;
+      }
+      &__table-footer {
+        background: transparent;
+        td {
+          height: 5rem;
+          background-color: #373b53;
+          color: white;
+        }
       }
     }
   }

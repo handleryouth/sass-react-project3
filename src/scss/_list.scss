@@ -1,10 +1,59 @@
-.list__link__button{
-    width: clamp(35rem, 56vw, 50rem);
+.list__link {
+  &__button {
+    width: 48rem;
     height: 5rem;
     @include noborderoutline();
+    box-shadow: -2px 1px 16px -2px rgba(0, 0, 0, 0.75);
     border-radius: 5px;
-    @include flexContainer(row, center,space-around);
-    background-color: yellowgreen;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    background-color: white;
+    border: 1px solid white;
     margin-bottom: 2rem;
     cursor: pointer;
+    transition: border 0.2s ease;
+  }
+  &__button:hover {
+    border: 1px solid rgb(124, 93, 250);
+  }
+
+  @media (max-width: 856px) {
+    &__button {
+      height: 9rem;
+      width: clamp(300px, 90vw, 48rem);
+      margin: 0 auto 2rem auto;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      &--total,
+      &--due,
+      &--status {
+        margin-top: 0;
+      }
+      &--header,
+      &--client {
+        margin-bottom: 0;
+      }
+      &--header {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      &--due {
+        grid-column: 1;
+        grid-row: 2;
+      }
+      &--total {
+        grid-column: 1;
+        grid-row: 3;
+      }
+      &--client {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      &--status {
+        grid-column: 2;
+        grid-row: 2;
+      }
+    }
+  }
 }

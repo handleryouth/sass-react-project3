@@ -2,20 +2,11 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Edit({ list, setList }) {
+export default function Edit({setList, setCreate }) {
   const [from, setFrom] = useState(createTemplate.senderAddress);
   const [newList, setNewList] = useState(createTemplate);
   const [itemList, setItemList] = useState([]);
   console.log(newList);
-
-  useEffect(
-    () =>
-      setNewList((prevState) => ({
-        ...prevState,
-        id: uuidv4().slice(0, 6).toUpperCase(),
-      })),
-    [list]
-  );
 
   useEffect(
     () => setNewList((prevState) => ({ ...prevState, items: itemList })),
@@ -129,7 +120,32 @@ export default function Edit({ list, setList }) {
   }
 
   function HandleAddToTheList() {
-    setList((prevState) => [...prevState, newList]);
+    setList((prevState) => [
+      ...prevState,
+      {
+        ...newList,
+        status: "pending",
+        id: uuidv4().slice(0, 6).toUpperCase(),
+      },
+    ]);
+  }
+
+  function HandleCancel() {
+    setCreate(false);
+    setFrom(createTemplate.senderAddress);
+    setNewList(createTemplate);
+    setItemList([]);
+  }
+
+  function HandleDraft() {
+    setList((prevState) => [
+      ...prevState,
+      {
+        ...newList,
+        id: uuidv4().slice(0, 6).toUpperCase(),
+      },
+    ]);
+    setCreate(false);
   }
 
   return (
@@ -352,8 +368,18 @@ export default function Edit({ list, setList }) {
       </div>
 
       <div>
-        <button>Cancel</button>
-        <button onClick={HandleAddToTheList}>Save Changes</button>
+        <button type="reset" onClick={HandleCancel}>
+          Discard
+        </button>
+
+        <div>
+          <button type="reset" onClick={HandleDraft}>
+            Save as Draft
+          </button>
+          <button type="reset" onClick={HandleAddToTheList}>
+            Save Changes
+          </button>
+        </div>
       </div>
     </form>
   );
@@ -367,7 +393,7 @@ const createTemplate = {
   paymentTerms: 1,
   clientName: "",
   clientEmail: "",
-  status: "pending",
+  status: "draft",
   senderAddress: {
     street: "",
     city: "",

@@ -1,5 +1,80 @@
 .home {
-  &__data {
-    @include flexContainer(column, center, center);
+  width: 768px;
+  margin: 0 auto;
+  &__title {
+    width: clamp(300px, 90vw, 49rem);
+    margin: 0 auto 3rem auto;
+    @include flexContainer(row, center, space-between);
+    @media (max-width: 520px) {
+      @include flexContainer(column, flex-start, flex-start);
+    }
+    &__command {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      @media (max-width: 520px) {
+        width: 100%;
+        @include flexContainer(row, center, space-between);
+      }
+
+      &__filter {
+        display: flex;
+        align-items: center;
+      }
+      &__status {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        img {
+          margin-left: 2rem;
+        }
+      }
+
+      &__checkbox {
+        position: absolute;
+        top: 4rem;
+        background-color: white;
+        padding: 1rem;
+        width: 13rem;
+        right: 10vw;
+        border-radius: 5px;
+        box-shadow: -2px 1px 16px -2px rgba(0, 0, 0, 0.75);
+      }
+      &__button {
+        button {
+          cursor: pointer;
+          @include noborderoutline;
+          background-color: rgb(124, 93, 250);
+          margin-left: 2rem;
+          height: 3.5rem;
+          width: 9.5rem;
+          color: white;
+          border-radius: 2rem;
+
+          @media (max-width: 856px) {
+            display: flex;
+            align-items: center;
+            width: clamp(8.5rem, 19vw, 9.5rem);
+            height: 3rem;
+          }
+
+          span {
+            padding: 0.6rem 0.8rem;
+            border-radius: 100%;
+            background-color: white;
+            color: rgb(124, 93, 250);
+            margin-right: 1rem;
+            @media (max-width: 856px) {
+              padding: clamp(0.1rem, 5vw, 0.6rem) clamp(0.35rem, 5vw, 0.8rem);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 856px) {
+    width: initial;
   }
 }

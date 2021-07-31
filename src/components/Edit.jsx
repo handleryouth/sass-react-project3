@@ -1,93 +1,100 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Edit(props) {
-  const { title, setList, ...i } = props;
+  const { title, setList, setEdit, ...i } = props;
+  const editTemplate = { ...i };
   const [item, setItem] = useState(i.items);
+  const [editList, setEditList] = useState(editTemplate);
+
+  useEffect(() => {
+    setEditList((prevState) => ({
+      ...prevState,
+      items: item,
+      total: item.reduce((count, x) => x.total + count, 0),
+    }));
+  }, [item]);
 
   function HandleChangeFrom(event) {
-    setList((prevState) =>
-      prevState.map((x) =>
-        x.id === i.id
-          ? {
-              ...x,
-              senderAddress: {
-                street:
-                  event.id === "streetFrom"
-                    ? event.value
-                    : x.senderAddress.street,
-                city:
-                  event.id === "cityFrom" ? event.value : x.senderAddress.city,
-                postCode:
-                  event.id === "postCodeFrom"
-                    ? event.value
-                    : x.senderAddress.postCode,
-                country:
-                  event.id === "countryFrom"
-                    ? event.value
-                    : x.senderAddress.country,
-              },
-            }
-          : x
-      )
-    );
+    setEditList((prevState) => ({
+      ...prevState,
+      senderAddress: {
+        street:
+          event.id === "streetFrom"
+            ? event.value
+            : editList.senderAddress.street,
+        city:
+          event.id === "cityFrom" ? event.value : editList.senderAddress.city,
+        postCode:
+          event.id === "postCodeFrom"
+            ? event.value
+            : editList.senderAddress.postCode,
+        country:
+          event.id === "countryFrom"
+            ? event.value
+            : editList.senderAddress.country,
+      },
+    }));
   }
 
   function HandleChangeTo(event) {
-    setList((prevState) =>
-      prevState.map((x) =>
-        x.id === i.id
-          ? event.id === "streetTo" ||
-            event.id === "cityTo" ||
-            event.id === "postCodeTo" ||
-            event.id === "countryTo"
-            ? {
-                ...x,
-                clientAddress: {
-                  street:
-                    event.id === "streetTo"
-                      ? event.value
-                      : x.clientAddress.street,
-                  city:
-                    event.id === "cityTo" ? event.value : x.clientAddress.city,
-                  postCode:
-                    event.id === "postCodeTo"
-                      ? event.value
-                      : x.clientAddress.postCode,
-                  country:
-                    event.id === "countryTo"
-                      ? event.value
-                      : x.clientAddress.country,
-                },
-              }
-            : event.id === "clientName"
-            ? {
-                ...x,
-                clientName: event.value,
-              }
-            : event.id === "clientEmail"
-            ? {
-                ...x,
-                clientEmail: event.value,
-              }
-            : event.id === "createdAt"
-            ? {
-                ...x,
-                createdAt: event.value,
-              }
-            : event.id === "description"
-            ? {
-                ...x,
-                description: event.value,
-              }
-            : event.id === "createdAt"
-            ? {
-                ...x,
-                createdAt: event.value.toString(),
-              }
-            : ""
-          : x
-      )
+    setEditList((prevState) =>
+      event.id === "streetTo" ||
+      event.id === "cityTo" ||
+      event.id === "postCodeTo" ||
+      event.id === "countryTo"
+        ? {
+            ...prevState,
+            clientAddress: {
+              street:
+                event.id === "streetTo"
+                  ? event.value
+                  : editTemplate.clientAddress.street,
+              city:
+                event.id === "cityTo"
+                  ? event.value
+                  : editTemplate.clientAddress.city,
+              postCode:
+                event.id === "postCodeTo"
+                  ? event.value
+                  : editTemplate.clientAddress.postCode,
+              country:
+                event.id === "countryTo"
+                  ? event.value
+                  : editTemplate.clientAddress.country,
+            },
+          }
+        : event.id === "clientName"
+        ? {
+            ...prevState,
+            clientName: event.value,
+          }
+        : event.id === "clientEmail"
+        ? {
+            ...prevState,
+            clientEmail: event.value,
+          }
+        : event.id === "createdAt"
+        ? {
+            ...prevState,
+            createdAt: event.value,
+          }
+        : event.id === "description"
+        ? {
+            ...prevState,
+            description: event.value,
+          }
+        : event.id === "createdAt"
+        ? {
+            ...prevState,
+            createdAt: event.value.toString(),
+          }
+        : event.id === "netvalue"
+        ? {
+            ...prevState,
+            paymentTerms: parseInt(event.value),
+          }
+        : ""
     );
   }
 
@@ -136,8 +143,14 @@ export default function Edit(props) {
 
   function HandleSaveChanges(id) {
     setList((prevState) =>
-      prevState.map((x) => (x.id === id ? { ...x, items: item } : x))
+      prevState.map((x) =>
+        x.id === id ? { ...x, editList, status: "pending", items: item } : x
+      )
     );
+  }
+
+  function HandleCancel() {
+    setEdit(false);
   }
 
   return (
@@ -158,7 +171,7 @@ export default function Edit(props) {
               onChange={(e) => HandleChangeFrom(e.target)}
               type="text"
               id="streetFrom"
-              value={i.senderAddress.street}
+              value={editList.senderAddress.street}
               required
             />
           </div>
@@ -170,7 +183,7 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeFrom(e.target)}
                 type="text"
                 id="cityFrom"
-                value={i.senderAddress.city}
+                value={editList.senderAddress.city}
                 required
               />
             </div>
@@ -181,7 +194,7 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeFrom(e.target)}
                 type="text"
                 id="postCodeFrom"
-                value={i.senderAddress.postCode}
+                value={editList.senderAddress.postCode}
                 required
               />
             </div>
@@ -192,7 +205,7 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeFrom(e.target)}
                 type="text"
                 id="countryFrom"
-                value={i.senderAddress.country}
+                value={editList.senderAddress.country}
                 required
               />
             </div>
@@ -208,7 +221,7 @@ export default function Edit(props) {
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="clientName"
-              value={i.clientName}
+              value={editList.clientName}
               required
             />
           </div>
@@ -219,7 +232,7 @@ export default function Edit(props) {
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="clientEmail"
-              value={i.clientEmail}
+              value={editList.clientEmail}
               required
             />
           </div>
@@ -230,7 +243,7 @@ export default function Edit(props) {
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="streetTo"
-              value={i.clientAddress.street}
+              value={editList.clientAddress.street}
               required
             />
           </div>
@@ -242,7 +255,7 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="text"
                 id="cityTo"
-                value={i.clientAddress.city}
+                value={editList.clientAddress.city}
                 required
               />
             </div>
@@ -253,7 +266,7 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="text"
                 id="postCodeTo"
-                value={i.clientAddress.postCode}
+                value={editList.clientAddress.postCode}
                 required
               />
             </div>
@@ -264,7 +277,7 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="text"
                 id="countryTo"
-                value={i.clientAddress.country}
+                value={editList.clientAddress.country}
                 required
               />
             </div>
@@ -277,14 +290,14 @@ export default function Edit(props) {
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="date"
                 id="createdAt"
-                value={i.createdAt}
+                value={editList.createdAt}
                 required
               />
             </div>
 
             <div>
               <label htmlFor="netvalue">Payment Terms</label>
-              <select id="netvalue">
+              <select onChange={(e) => HandleChangeTo(e.target)} id="netvalue">
                 <option value="1day">Net 1 Day</option>
                 <option value="7days">Net 7 Days</option>
                 <option value="14days">Net 14 Days</option>
@@ -299,7 +312,7 @@ export default function Edit(props) {
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="description"
-              value={i.description}
+              value={editList.description}
               required
             />
           </div>
@@ -394,7 +407,9 @@ export default function Edit(props) {
       </div>
 
       <div>
-        <button>Cancel</button>
+        <button type="reset" onClick={() => HandleCancel()}>
+          Cancel
+        </button>
         <button
           id={i.id}
           onClick={(e) => {

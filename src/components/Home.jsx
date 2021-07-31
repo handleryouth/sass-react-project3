@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import Media from "react-media";
 import List from "./List";
 import Checkbox from "./Checkbox";
 import Create from "./Create";
@@ -6,6 +7,7 @@ import Create from "./Create";
 export default function Home({ list, setList }) {
   const [filter, setFilter] = useState("");
   const [create, setCreate] = useState(false);
+  const [status, setStatus] = useState(false);
 
   const paidStatus = list.filter((i) => i.status === "paid");
   const pendingStatus = list.filter((i) => i.status === "pending");
@@ -14,67 +16,85 @@ export default function Home({ list, setList }) {
   const total = useMemo(() => list.reduce((count) => count + 1, 0), [list]);
 
   return (
-    <div className="home">
-      <aside style={create ? {display :"block"} : {display: "none"}}>
-        <Create list={list} setList={setList} />
+    <div>
+      <aside style={create ? { display: "block" } : { display: "none" }}>
+        <Create
+          list={list}
+          setList={setList}
+          setCreate={setCreate}
+          create={create}
+        />
       </aside>
 
-      <div className="home__title">
-        <div>
-          <h1>Invoices</h1>
-          <p>{`There are ${total} total invoices.`}</p>
-        </div>
-
-        <div>
-          <div>
-            <div>
-              <p>Filter by Status</p>
-              <img src="/images/icon-arrow-down.svg" alt="arrow" />
-            </div>
-
-            {/* filter container */}
-
-            <div>
-              <Checkbox
-                status="paid"
-                setFilter={setFilter}
-                id="filter1"
-                filter={filter}
-              />
-
-              <Checkbox
-                status="pending"
-                setFilter={setFilter}
-                id="filter2"
-                filter={filter}
-              />
-
-              <Checkbox
-                status="draft"
-                setFilter={setFilter}
-                id="filter3"
-                filter={filter}
-              />
-            </div>
+      <div className="home">
+        <div className="home__title">
+          <div className="home__title__header">
+            <h1>Invoices</h1>
+            <p>{`There are ${total} total invoices.`}</p>
           </div>
 
-          <div>
-            <button onClick={() => setCreate(true)}>
-              <span>+</span>
-              New Invoice
-            </button>
+          <div className="home__title__command">
+            <div className="home__title__command__filter">
+              <div
+                onClick={() => setStatus((prevState) => !prevState)}
+                className="home__title__command__status"
+              >
+                <Media query="(max-width: 856px)">
+                  {(matches) =>
+                    matches ? <p>Filter</p> : <p>Filter by Status</p>
+                  }
+                </Media>
+
+                <img src="/images/icon-arrow-down.svg" alt="arrow" />
+              </div>
+
+              {/* filter container */}
+
+              <div
+                style={status ? { display: "block" } : { display: "none" }}
+                className="home__title__command__checkbox"
+              >
+                <Checkbox
+                  status="paid"
+                  setFilter={setFilter}
+                  id="filter1"
+                  filter={filter}
+                />
+
+                <Checkbox
+                  status="pending"
+                  setFilter={setFilter}
+                  id="filter2"
+                  filter={filter}
+                />
+
+                <Checkbox
+                  status="draft"
+                  setFilter={setFilter}
+                  id="filter3"
+                  filter={filter}
+                />
+              </div>
+            </div>
+
+            <div className="home__title__command__button">
+              <button onClick={() => setCreate(true)}>
+                <span>+</span>
+                New Invoice
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="home__data">
-        {filter === "paid"
-          ? paidStatus.map((i) => <List {...i} key={i.id} />)
-          : filter === "pending"
-          ? pendingStatus.map((i) => <List {...i} key={i.id} />)
-          : filter === "draft"
-          ? draftStatus.map((i) => <List {...i} key={i.id} />)
-          : list.map((i) => <List {...i} key={i.id} />)}
+        <div className="home__data">
+          {filter === "paid"
+            ? paidStatus.map((i) => <List {...i} key={i.id} />)
+            : filter === "pending"
+            ? pendingStatus.map((i) => <List {...i} key={i.id} />)
+            : filter === "draft"
+            ? draftStatus.map((i) => <List {...i} key={i.id} />)
+            : list.map((i) => <List {...i} key={i.id} />)}
+        </div>
       </div>
     </div>
   );
