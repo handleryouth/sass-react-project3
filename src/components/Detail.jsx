@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Media from "react-media";
 import { useParams, Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmDelete from "./ConfirmDelete";
 import Edit from "./Edit";
+import { variable } from "../App";
 
-export default function Detail({ list, setList }) {
+export default function Detail() {
+  const { list, setList } = useContext(variable);
   const [approve, setApprove] = useState(false);
   const [edit, setEdit] = useState(false);
   const { id } = useParams();
@@ -20,7 +22,7 @@ export default function Detail({ list, setList }) {
 
   return selectedData.map((i) => {
     return (
-      <div key={i.id}>
+      <div key={i.id} className="app-detail">
         <aside style={edit ? { display: "block" } : { display: "none" }}>
           <Edit
             {...i}

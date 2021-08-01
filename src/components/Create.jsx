@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 
-export default function Edit({setList, setCreate }) {
+export default function Edit({ setList, setCreate, create }) {
   const [from, setFrom] = useState(createTemplate.senderAddress);
   const [newList, setNewList] = useState(createTemplate);
   const [itemList, setItemList] = useState([]);
@@ -128,6 +128,8 @@ export default function Edit({setList, setCreate }) {
         id: uuidv4().slice(0, 6).toUpperCase(),
       },
     ]);
+
+    HandleCancel();
   }
 
   function HandleCancel() {
@@ -149,16 +151,19 @@ export default function Edit({setList, setCreate }) {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <div>
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className={`create ${create ? "create__triggered" : ""}`}
+    >
+      <div className="create__header">
         <h1>Create Invoice</h1>
       </div>
 
-      <div>
+      <div className="create__input">
         <div>
           <h3>bill From</h3>
 
-          <div>
+          <div className="create__input__streetfrom">
             <label htmlFor="streetFrom">Street Address</label>
             <input
               onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
@@ -167,8 +172,8 @@ export default function Edit({setList, setCreate }) {
             />
           </div>
 
-          <div>
-            <div>
+          <div className="create__input__detail">
+            <div className="create__input__detail__child">
               <label htmlFor="cityFrom">City</label>
               <input
                 onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
@@ -177,7 +182,7 @@ export default function Edit({setList, setCreate }) {
               />
             </div>
 
-            <div>
+            <div className="create__input__detail__child">
               <label htmlFor="postcodeFrom">Post Code</label>
               <input
                 onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
@@ -186,7 +191,7 @@ export default function Edit({setList, setCreate }) {
               />
             </div>
 
-            <div>
+            <div className="create__input__detail__child">
               <label htmlFor="countryFrom">Country</label>
               <input
                 onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
@@ -200,7 +205,7 @@ export default function Edit({setList, setCreate }) {
         <div>
           <h3>Bill To</h3>
 
-          <div>
+          <div className="create__input__clientname">
             <label htmlFor="clientName">Client's Name</label>
             <input
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -209,7 +214,7 @@ export default function Edit({setList, setCreate }) {
             />
           </div>
 
-          <div>
+          <div className="create__input__clientemail">
             <label htmlFor="clientEmail">Client's Email</label>
             <input
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -218,7 +223,7 @@ export default function Edit({setList, setCreate }) {
             />
           </div>
 
-          <div>
+          <div className="create__input__clientstreet">
             <label htmlFor="streetTo">Street Address</label>
             <input
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -227,8 +232,8 @@ export default function Edit({setList, setCreate }) {
             />
           </div>
 
-          <div>
-            <div>
+          <div className="create__input__clientdetail">
+            <div className="create__input__clientdetail__child">
               <label htmlFor="cityTo">City</label>
               <input
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -237,7 +242,7 @@ export default function Edit({setList, setCreate }) {
               />
             </div>
 
-            <div>
+            <div className="create__input__clientdetail__child">
               <label htmlFor="postCodeTo">Post Code</label>
               <input
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -246,7 +251,7 @@ export default function Edit({setList, setCreate }) {
               />
             </div>
 
-            <div>
+            <div className="create__input__clientdetail__child">
               <label htmlFor="countryTo">Country</label>
               <input
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -256,8 +261,8 @@ export default function Edit({setList, setCreate }) {
             </div>
           </div>
 
-          <div>
-            <div>
+          <div className="create__input__date">
+            <div className="create__input__date__invoicedate">
               <label htmlFor="createdAt">Invoice Date</label>
               <input
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -266,7 +271,7 @@ export default function Edit({setList, setCreate }) {
               />
             </div>
 
-            <div>
+            <div className="create__input__date__paymentterm">
               <label htmlFor="paymentterm">Payment Terms</label>
               <select
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -280,7 +285,7 @@ export default function Edit({setList, setCreate }) {
             </div>
           </div>
 
-          <div>
+          <div className="create__input__description">
             <label htmlFor="description">Description</label>
             <input
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
@@ -290,19 +295,21 @@ export default function Edit({setList, setCreate }) {
           </div>
         </div>
 
-        <div>
-          <h3>ItemList</h3>
+        <div className="create__itemlist">
+          <h1>Item List</h1>
           <div>
-            <table>
-              <thead>
-                <tr>
-                  <td>Item Name</td>
-                  <td>Qty</td>
-                  <td>Price</td>
-                  <td>Total</td>
-                  <td></td>
-                </tr>
-              </thead>
+            <table className="create__itemlist__table">
+              {itemList.length > 0 && (
+                <thead>
+                  <tr>
+                    <td>Item Name</td>
+                    <td>Qty</td>
+                    <td>Price</td>
+                    <td>Total</td>
+                    <td></td>
+                  </tr>
+                </thead>
+              )}
 
               <tbody>
                 {itemList.map((x) => {
@@ -310,6 +317,7 @@ export default function Edit({setList, setCreate }) {
                     <tr key={x.id}>
                       <td>
                         <input
+                          className="create__itemlist__table__itemname"
                           id={x.id}
                           type="text"
                           name="name"
@@ -325,6 +333,7 @@ export default function Edit({setList, setCreate }) {
                       </td>
                       <td>
                         <input
+                          className="create__itemlist__table__quantity"
                           id={x.id}
                           type="number"
                           name="quantity"
@@ -340,6 +349,7 @@ export default function Edit({setList, setCreate }) {
                       </td>
                       <td>
                         <input
+                          className="create__itemlist__table__price"
                           id={x.id}
                           type="number"
                           name="price"
@@ -353,8 +363,15 @@ export default function Edit({setList, setCreate }) {
                           }
                         />
                       </td>
-                      <td>
+                      <td className="create__itemlist__table__total">
                         <p>{x.total}</p>
+                      </td>
+
+                      <td className="create__itemlist__table__delete">
+                        <img
+                          src="/images/icon-delete.svg"
+                          alt="Delete Command"
+                        />
                       </td>
                     </tr>
                   );
@@ -364,19 +381,34 @@ export default function Edit({setList, setCreate }) {
           </div>
         </div>
 
-        <button onClick={HandleAddItem}> + Add New Item</button>
+        <button className="create__input__additem" onClick={HandleAddItem}>
+          {" "}
+          + Add New Item
+        </button>
       </div>
 
-      <div>
-        <button type="reset" onClick={HandleCancel}>
+      <div className="create__command">
+        <button
+          className="create__command__discard"
+          type="reset"
+          onClick={HandleCancel}
+        >
           Discard
         </button>
 
-        <div>
-          <button type="reset" onClick={HandleDraft}>
+        <div className="create__command__save">
+          <button
+            className="create__command__save__draft"
+            type="reset"
+            onClick={HandleDraft}
+          >
             Save as Draft
           </button>
-          <button type="reset" onClick={HandleAddToTheList}>
+          <button
+            className="create__command__save__changes"
+            type="reset"
+            onClick={HandleAddToTheList}
+          >
             Save Changes
           </button>
         </div>

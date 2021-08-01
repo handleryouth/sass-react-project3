@@ -1,9 +1,12 @@
 @import "@fontsource/spartan";
+@import "./app";
 @import "./mixin";
 @import "./home";
 @import "./list";
 @import "./detail";
 @import "./checkbox";
+@import "./sidebar";
+@import "./create";
 
 *,
 *::after,
@@ -14,6 +17,7 @@
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 a{

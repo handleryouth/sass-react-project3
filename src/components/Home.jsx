@@ -1,13 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import Media from "react-media";
 import List from "./List";
 import Checkbox from "./Checkbox";
 import Create from "./Create";
+import {variable} from "../App";
 
-export default function Home({ list, setList }) {
+export default function Home() {
   const [filter, setFilter] = useState("");
-  const [create, setCreate] = useState(false);
   const [status, setStatus] = useState(false);
+  const { list, setList, create, setCreate } = useContext(variable);
 
   const paidStatus = list.filter((i) => i.status === "paid");
   const pendingStatus = list.filter((i) => i.status === "pending");
@@ -16,8 +17,8 @@ export default function Home({ list, setList }) {
   const total = useMemo(() => list.reduce((count) => count + 1, 0), [list]);
 
   return (
-    <div>
-      <aside style={create ? { display: "block" } : { display: "none" }}>
+    <div className="app-home">
+      <aside>
         <Create
           list={list}
           setList={setList}
@@ -78,7 +79,7 @@ export default function Home({ list, setList }) {
             </div>
 
             <div className="home__title__command__button">
-              <button onClick={() => setCreate(true)}>
+              <button onClick={() => setCreate((prevState) => !prevState)}>
                 <span>+</span>
                 New Invoice
               </button>

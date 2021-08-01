@@ -1,0 +1,198 @@
+.create {
+  position: fixed;
+  background-color: white;
+  z-index: 2;
+  width: clamp(46rem, 78vw, 70rem);
+  left: -70rem;
+  padding: 1rem;
+  transition: transform 0.8s ease;
+  height: 100vh;
+  overflow-y: auto;
+
+  h3 {
+    font-size: 0.8rem;
+  }
+  input,
+  select {
+    height: 3rem;
+    font-size: 1.3rem;
+  }
+
+  select {
+    @include noborderoutline;
+    outline: 1px solid black;
+    background-color: white;
+  }
+  @media (max-width: 852px) {
+    width: clamp(320px, 94vw, 50rem);
+    padding: 1vw;
+  }
+
+  &__triggered {
+    transform: translateX(76rem);
+    @media (max-width: 912px) {
+      transform: translateX(70rem);
+    }
+  }
+
+  &__input {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: auto;
+    height: 35rem;
+    @media (max-width: 913px) {
+    }
+    &__streetfrom,
+    &__clientname,
+    &__clientemail,
+    &__clientstreet {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 2rem;
+      input {
+        width: clamp(38rem, 66vw, 59rem);
+        @media (max-width: 856px) {
+          width: clamp(17rem, 70vw, 38rem);
+        }
+      }
+    }
+    &__detail {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      @media (max-width: 852px) {
+        grid-template-columns: repeat(auto-fit, 20rem);
+      }
+      &__child {
+        display: flex;
+        flex-direction: column;
+        @media (max-width: 852px) {
+          margin-top: 2rem;
+        }
+        input {
+          width: clamp(10rem, 21vw, 18rem);
+          @media (max-width: 852px) {
+            width: clamp(17rem, 2vw, 19rem);
+          }
+        }
+      }
+    }
+    &__clientdetail {
+      @extend .create__input__detail;
+      margin-bottom: 2rem;
+      &__child {
+        @extend .create__input__detail__child;
+      }
+    }
+    &__date {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 2rem;
+      margin-bottom: 2rem;
+      @media (max-width: 852px) {
+        grid-template-columns: repeat(auto-fit, 15rem);
+      }
+      &__invoicedate,
+      &__paymentterm {
+        display: flex;
+        flex-direction: column;
+        input,
+        select {
+          width: clamp(16rem, 31vw, 29rem);
+        }
+        @media (max-width: 852px) {
+          margin-top: 2rem;
+        }
+      }
+    }
+    &__description {
+      display: flex;
+      flex-direction: column;
+      input {
+        width: clamp(38rem, 66vw, 59rem);
+        @media (max-width: 856px) {
+          width: clamp(17rem, 70vw, 38rem);
+        }
+      }
+    }
+    &__additem {
+      font-weight: bolder;
+      min-width: 4rem;
+      cursor: pointer;
+      height: 2.7rem;
+      width: 90%;
+      color: rgb(126, 136, 195);
+      margin: 0 auto;
+      @include noborderoutline;
+      border-radius: 2rem;
+      transition: background-color 0.2s ease;
+      &:hover {
+        background-color: rgba(126, 136, 195, 0.3);
+      }
+    }
+  }
+
+  &__command {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    @media (max-width: 530px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    &__discard {
+      @include noborderoutline;
+      border-radius: 2rem;
+      font-weight: bolder;
+      color: rgb(126, 136, 195);
+      background-color: rgba(126, 136, 195, 0.3);
+      width: 7rem;
+      height: 3rem;
+      cursor: pointer;
+    }
+    &__save {
+      display: flex;
+      align-items: center;
+      @media (max-width: 530px) {
+        margin-top: 2rem;
+      }
+      button {
+        @extend .create__command__discard;
+        margin: 0 0 0 1rem;
+        width: 9rem;
+        height: 3rem;
+        cursor: pointer;
+      }
+      &__draft {
+        background-color: rgb(54, 59, 83) !important;
+      }
+      &__changes {
+        background-color: rgb(124, 93, 250) !important;
+        color: white !important;
+      }
+    }
+  }
+
+  &__itemlist {
+    &__table {
+      width: 100%;
+      &__itemname {
+        width: clamp(11rem, 28vw, 25rem);
+      }
+      &__quantity {
+        width: 9rem;
+      }
+      &__price {
+        width: 7rem;
+      }
+      &__total {
+        width: 8rem;
+      }
+      &__delete {
+        width: 7rem;
+      }
+    }
+  }
+}
