@@ -5,15 +5,20 @@
     width: clamp(300px, 90vw, 49rem);
     margin: 0 auto 3rem auto;
     @include flexContainer(row, center, space-between);
-    @media (max-width: 520px) {
+    @media (max-width: 558px) {
       @include flexContainer(column, flex-start, flex-start);
+    }
+    &__header{
+      h1{
+        font-weight: bolder;
+      }
     }
     &__command {
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
-      @media (max-width: 520px) {
+      @media (max-width: 558px) {
         width: 100%;
         @include flexContainer(row, center, space-between);
       }
@@ -55,7 +60,6 @@
           @media (max-width: 856px) {
             display: flex;
             align-items: center;
-            width: clamp(8.5rem, 19vw, 9.5rem);
             height: 3rem;
           }
 

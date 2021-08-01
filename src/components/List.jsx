@@ -15,13 +15,33 @@ export default function List(props) {
             return item.total + count;
           }, 0)}
         </p>
-        <p className="list__link__button--status">
-          {status === "paid"
-            ? "paid"
-            : status === "pending"
-            ? "pending"
-            : "draft"}
-        </p>
+
+        <div
+          className={`list__link__button--status list__link__button--status-${
+            status === "paid"
+              ? "paid"
+              : status === "pending"
+              ? "pending"
+              : "draft"
+          } `}
+        >
+          <div
+            className={`list__link__button--status--bullet list__link__button--status--bullet-${
+              status === "paid"
+                ? "paid"
+                : status === "pending"
+                ? "pending"
+                : "draft"
+            }`}
+          />
+          <p className="list__link__button--status-text">
+            {status === "paid"
+              ? "paid"
+              : status === "pending"
+              ? "pending"
+              : "draft"}
+          </p>
+        </div>
       </button>
     </Link>
   );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Media from "react-media";
 import { useParams, Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ConfirmDelete from "./ConfirmDelete";
@@ -58,7 +59,7 @@ export default function Detail({ list, setList }) {
                       ? "pending"
                       : "draft"
                   }`}
-                ></div>
+                />
                 <p className="detail__command__status__container--description">
                   {i.status}
                 </p>
@@ -158,8 +159,22 @@ export default function Detail({ list, setList }) {
               <thead>
                 <tr>
                   <th>Item Name</th>
-                  <th>QTY</th>
-                  <th>Price</th>
+                  <Media query="(max-width: 460px)">
+                    {(matches) =>
+                      matches ? (
+                        <>
+                          <th></th>
+                          <th></th>
+                        </>
+                      ) : (
+                        <>
+                          <th>QTY</th>
+                          <th>Price</th>
+                        </>
+                      )
+                    }
+                  </Media>
+
                   <th>Total</th>
                 </tr>
               </thead>
@@ -169,8 +184,22 @@ export default function Detail({ list, setList }) {
                   return (
                     <tr key={uuidv4()}>
                       <td>{x.name}</td>
-                      <td>{x.quantity}</td>
-                      <td>£{x.price}</td>
+                      <Media query="(max-width: 460px)">
+                        {(matches) =>
+                          matches ? (
+                            <>
+                              <td></td>
+                              <td></td>
+                            </>
+                          ) : (
+                            <>
+                              <td>{x.quantity}</td>
+                              <td>£{x.price}</td>
+                            </>
+                          )
+                        }
+                      </Media>
+
                       <td>£{x.total}</td>
                     </tr>
                   );

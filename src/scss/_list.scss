@@ -13,6 +13,40 @@
     margin-bottom: 2rem;
     cursor: pointer;
     transition: border 0.2s ease;
+    &--status {
+      width: 8rem;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      &-paid {
+        background-color: rgba(51, 214, 159, 0.2);
+        color: rgb(51, 214, 159);
+      }
+      &-pending {
+        background-color: rgba(255, 143, 0, 0.2);
+        color: rgb(255, 143, 0);
+      }
+      &-draft {
+        color: rgb(55, 59, 83);
+        background-color: #f3f3f5;
+      }
+      &--bullet {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 100%;
+        margin-right: 0.5rem;
+        &-paid {
+          background-color: rgb(51, 214, 159);
+        }
+        &-pending {
+          background-color: rgb(255, 143, 0);
+        }
+        &-draft {
+          background-color: rgb(55, 59, 83);
+        }
+      }
+    }
   }
   &__button:hover {
     border: 1px solid rgb(124, 93, 250);
@@ -53,6 +87,8 @@
       &--status {
         grid-column: 2;
         grid-row: 2;
+        width: 9rem;
+        justify-self: center;
       }
     }
   }
