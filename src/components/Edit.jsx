@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { variable } from "../App";
 
 export default function Edit(props) {
   const { title, setList, setEdit, edit, ...i } = props;
+  const { darkTheme } = useContext(variable);
   const editTemplate = { ...i };
   const [item, setItem] = useState(i.items);
   const [editList, setEditList] = useState(editTemplate);
@@ -153,10 +155,17 @@ export default function Edit(props) {
     setEdit(false);
   }
 
+  const darkInput = {
+    backgroundColor: "rgb(30, 33, 57)",
+    border: "none",
+    color: "white",
+  };
+
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
       className={`create ${edit ? "create__triggered" : ""}`}
+      style={darkTheme ? { backgroundColor: "#141625", color: "white" } : null}
     >
       <div className="create__header">
         <h1>
@@ -171,6 +180,7 @@ export default function Edit(props) {
           <div className="create__input__streetfrom">
             <label htmlFor="streetFrom">Street Address</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleChangeFrom(e.target)}
               type="text"
               id="streetFrom"
@@ -183,6 +193,7 @@ export default function Edit(props) {
             <div className="create__input__detail__child">
               <label htmlFor="cityFrom">City</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeFrom(e.target)}
                 type="text"
                 id="cityFrom"
@@ -194,6 +205,7 @@ export default function Edit(props) {
             <div className="create__input__detail__child">
               <label htmlFor="postcodeFrom">Post Code</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeFrom(e.target)}
                 type="text"
                 id="postCodeFrom"
@@ -205,6 +217,7 @@ export default function Edit(props) {
             <div className="create__input__detail__child">
               <label htmlFor="countryFrom">Country</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeFrom(e.target)}
                 type="text"
                 id="countryFrom"
@@ -221,6 +234,7 @@ export default function Edit(props) {
           <div className="create__input__clientname">
             <label htmlFor="clientName">Client's Name</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="clientName"
@@ -232,6 +246,7 @@ export default function Edit(props) {
           <div className="create__input__clientemail">
             <label htmlFor="clientEmail">Client's Email</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="clientEmail"
@@ -243,6 +258,7 @@ export default function Edit(props) {
           <div className="create__input__clientstreet">
             <label htmlFor="streetTo">Street Address</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="streetTo"
@@ -255,6 +271,7 @@ export default function Edit(props) {
             <div className="create__input__clientdetail__child">
               <label htmlFor="cityTo">City</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="text"
                 id="cityTo"
@@ -266,6 +283,7 @@ export default function Edit(props) {
             <div className="create__input__clientdetail__child">
               <label htmlFor="postCodeTo">Post Code</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="text"
                 id="postCodeTo"
@@ -277,6 +295,7 @@ export default function Edit(props) {
             <div className="create__input__clientdetail__child">
               <label htmlFor="countryTo">Country</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="text"
                 id="countryTo"
@@ -290,6 +309,7 @@ export default function Edit(props) {
             <div className="create__input__date__invoicedate">
               <label htmlFor="createdAt">Invoice Date</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeTo(e.target)}
                 type="date"
                 id="createdAt"
@@ -300,7 +320,11 @@ export default function Edit(props) {
 
             <div className="create__input__date__paymentterm">
               <label htmlFor="netvalue">Payment Terms</label>
-              <select onChange={(e) => HandleChangeTo(e.target)} id="netvalue">
+              <select
+                style={darkTheme ? darkInput : null}
+                onChange={(e) => HandleChangeTo(e.target)}
+                id="netvalue"
+              >
                 <option value="1day">Net 1 Day</option>
                 <option value="7days">Net 7 Days</option>
                 <option value="14days">Net 14 Days</option>
@@ -312,6 +336,7 @@ export default function Edit(props) {
           <div className="create__input__description">
             <label htmlFor="description">Description</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleChangeTo(e.target)}
               type="text"
               id="description"
@@ -343,7 +368,7 @@ export default function Edit(props) {
                     <tr key={index}>
                       <td className="create__itemlist__table__itemname">
                         <input
-                          
+                          style={darkTheme ? darkInput : null}
                           onChange={(e) =>
                             HandleItems(
                               e.target.value,
@@ -360,6 +385,7 @@ export default function Edit(props) {
                       </td>
                       <td className="create__itemlist__table__quantity">
                         <input
+                          style={darkTheme ? darkInput : null}
                           onChange={(e) =>
                             HandleItems(
                               e.target.value,
@@ -376,7 +402,7 @@ export default function Edit(props) {
                       </td>
                       <td className="create__itemlist__table__price">
                         <input
-                          
+                          style={darkTheme ? darkInput : null}
                           onChange={(e) =>
                             HandleItems(
                               e.target.value,

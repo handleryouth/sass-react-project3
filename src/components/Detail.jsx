@@ -7,7 +7,7 @@ import Edit from "./Edit";
 import { variable } from "../App";
 
 export default function Detail() {
-  const { list, setList } = useContext(variable);
+  const { list, setList, darkTheme } = useContext(variable);
   const [approve, setApprove] = useState(false);
   const [edit, setEdit] = useState(false);
   const { id } = useParams();
@@ -22,7 +22,7 @@ export default function Detail() {
 
   return selectedData.map((i) => {
     return (
-      <div key={i.id} className="app-detail">
+      <div style={darkTheme ? {backgroundColor: "#141625"} : null} key={i.id} className="app-detail">
         <aside>
           <Edit
             {...i}
@@ -42,13 +42,13 @@ export default function Detail() {
           <Link to="/">
             <div className="detail__back">
               <img src="/images/icon-arrow-left.svg" alt="Back" />
-              <p>Go Back</p>
+              <p style={darkTheme ? {color: "white"} : null}>Go Back</p>
             </div>
           </Link>
 
-          <div className="detail__command">
+          <div style={darkTheme ? {backgroundColor: "rgb(30, 33, 57)"} : null} className="detail__command">
             <div className="detail__command__status">
-              <p>Status</p>
+              <p style={darkTheme ? {color: "white"} : null}>Status</p>
               <div
                 className={`detail__command__status__container detail__command__status__container-${
                   i.status === "paid"
@@ -115,7 +115,7 @@ export default function Detail() {
           </div>
 
           {/* batas pertama */}
-          <div className="detail__info">
+          <div style={darkTheme ? {backgroundColor: "rgb(30, 33, 57)", color: "white"} : null} className="detail__info">
             <div className="detail__info__grid-1-1">
               <h2>#{id}</h2>
               <p>{i.description}</p>

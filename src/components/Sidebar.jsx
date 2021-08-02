@@ -1,4 +1,8 @@
-export default function Sidebar({ setDarkTheme, darkTheme }) {
+import {useContext} from "react"
+import {variable} from "../App"
+
+export default function Sidebar() {
+  const {setDarkTheme, darkTheme} = useContext(variable)
   function ChangeTheme() {
     setDarkTheme((prevState) => !prevState);
   }

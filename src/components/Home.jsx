@@ -3,12 +3,12 @@ import Media from "react-media";
 import List from "./List";
 import Checkbox from "./Checkbox";
 import Create from "./Create";
-import {variable} from "../App";
+import { variable } from "../App";
 
 export default function Home() {
   const [filter, setFilter] = useState("");
   const [status, setStatus] = useState(false);
-  const { list, setList, create, setCreate } = useContext(variable);
+  const { list, setList, create, setCreate, darkTheme } = useContext(variable);
 
   const paidStatus = list.filter((i) => i.status === "paid");
   const pendingStatus = list.filter((i) => i.status === "pending");
@@ -17,7 +17,10 @@ export default function Home() {
   const total = useMemo(() => list.reduce((count) => count + 1, 0), [list]);
 
   return (
-    <div className="app-home">
+    <div
+      style={darkTheme ? { backgroundColor: "#141625" } : null}
+      className="app-home"
+    >
       <aside>
         <Create
           list={list}
@@ -29,13 +32,19 @@ export default function Home() {
 
       <div className="home">
         <div className="home__title">
-          <div className="home__title__header">
+          <div
+            style={darkTheme ? { color: "white" } : null}
+            className="home__title__header"
+          >
             <h1>Invoices</h1>
             <p>{`There are ${total} total invoices.`}</p>
           </div>
 
           <div className="home__title__command">
-            <div className="home__title__command__filter">
+            <div
+              style={darkTheme ? { color: "white" } : null}
+              className="home__title__command__filter"
+            >
               <div
                 onClick={() => setStatus((prevState) => !prevState)}
                 className="home__title__command__status"
@@ -52,7 +61,11 @@ export default function Home() {
               {/* filter container */}
 
               <div
-                style={status ? { display: "block" } : { display: "none" }}
+                style={
+                  status
+                    ? { display: "block", backgroundColor: "#141625" }
+                    : { display: "none" }
+                }
                 className="home__title__command__checkbox"
               >
                 <Checkbox

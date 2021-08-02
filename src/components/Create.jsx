@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
+import { variable } from "../App";
 
 export default function Edit({ setList, setCreate, create }) {
   const [from, setFrom] = useState(createTemplate.senderAddress);
   const [newList, setNewList] = useState(createTemplate);
   const [itemList, setItemList] = useState([]);
+  const { darkTheme } = useContext(variable);
   console.log(newList);
 
   useEffect(
@@ -154,10 +156,17 @@ export default function Edit({ setList, setCreate, create }) {
     setItemList((prevState) => prevState.filter((x) => x.id !== id));
   }
 
+  const darkInput = {
+    backgroundColor: "rgb(30, 33, 57)",
+    border: "none",
+    color: "white",
+  };
+
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
       className={`create ${create ? "create__triggered" : ""}`}
+      style={darkTheme ? { backgroundColor: "#141625", color: "white" } : null}
     >
       <div className="create__header">
         <h1>Create Invoice</h1>
@@ -170,6 +179,7 @@ export default function Edit({ setList, setCreate, create }) {
           <div className="create__input__streetfrom">
             <label htmlFor="streetFrom">Street Address</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
               type="text"
               id="streetFrom"
@@ -180,6 +190,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__detail__child">
               <label htmlFor="cityFrom">City</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
                 type="text"
                 id="cityFrom"
@@ -189,6 +200,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__detail__child">
               <label htmlFor="postcodeFrom">Post Code</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
                 type="text"
                 id="postCodeFrom"
@@ -198,6 +210,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__detail__child">
               <label htmlFor="countryFrom">Country</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateFrom(e.target.id, e.target.value)}
                 type="text"
                 id="countryFrom"
@@ -212,6 +225,7 @@ export default function Edit({ setList, setCreate, create }) {
           <div className="create__input__clientname">
             <label htmlFor="clientName">Client's Name</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
               type="text"
               id="clientName"
@@ -221,6 +235,7 @@ export default function Edit({ setList, setCreate, create }) {
           <div className="create__input__clientemail">
             <label htmlFor="clientEmail">Client's Email</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
               type="text"
               id="clientEmail"
@@ -230,6 +245,7 @@ export default function Edit({ setList, setCreate, create }) {
           <div className="create__input__clientstreet">
             <label htmlFor="streetTo">Street Address</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
               type="text"
               id="streetTo"
@@ -240,6 +256,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__clientdetail__child">
               <label htmlFor="cityTo">City</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
                 type="text"
                 id="cityTo"
@@ -249,6 +266,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__clientdetail__child">
               <label htmlFor="postCodeTo">Post Code</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
                 type="text"
                 id="postCodeTo"
@@ -258,6 +276,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__clientdetail__child">
               <label htmlFor="countryTo">Country</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
                 type="text"
                 id="countryTo"
@@ -269,6 +288,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__date__invoicedate">
               <label htmlFor="createdAt">Invoice Date</label>
               <input
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
                 type="date"
                 id="createdAt"
@@ -278,6 +298,7 @@ export default function Edit({ setList, setCreate, create }) {
             <div className="create__input__date__paymentterm">
               <label htmlFor="paymentterm">Payment Terms</label>
               <select
+                style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
                 id="paymentterm"
               >
@@ -292,6 +313,7 @@ export default function Edit({ setList, setCreate, create }) {
           <div className="create__input__description">
             <label htmlFor="description">Description</label>
             <input
+              style={darkTheme ? darkInput : null}
               onChange={(e) => HandleCreateTo(e.target.id, e.target.value)}
               type="text"
               id="description"
@@ -321,6 +343,7 @@ export default function Edit({ setList, setCreate, create }) {
                     <tr key={x.id}>
                       <td className="create__itemlist__table__itemname">
                         <input
+                          style={darkTheme ? darkInput : null}
                           id={x.id}
                           type="text"
                           name="name"
@@ -336,6 +359,7 @@ export default function Edit({ setList, setCreate, create }) {
                       </td>
                       <td className="create__itemlist__table__quantity">
                         <input
+                          style={darkTheme ? darkInput : null}
                           id={x.id}
                           type="number"
                           name="quantity"
@@ -351,6 +375,7 @@ export default function Edit({ setList, setCreate, create }) {
                       </td>
                       <td className="create__itemlist__table__price">
                         <input
+                          style={darkTheme ? darkInput : null}
                           id={x.id}
                           type="number"
                           name="price"
