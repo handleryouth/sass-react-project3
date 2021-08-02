@@ -24,7 +24,7 @@ export default function App() {
               create ? "app__backdrop__triggered" : ""
             }`}
           ></div>
-          <Sidebar setDarkTheme={setDarkTheme} darkTheme={darkTheme} />
+          <Sidebar />
 
           <Switch>
             <Route exact path="/" render={() => <Home />} />
