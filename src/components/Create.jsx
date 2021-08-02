@@ -73,11 +73,9 @@ export default function Edit({ setList, setCreate, create }) {
         ? {
             ...prevState,
             createdAt: value,
-            paymentDue:
-              prevState.paymentTerms.toString() !== "" &&
-              moment(value, "YYYY-MM-DD")
-                .add(prevState.paymentTerms, "d")
-                .format("YYYY-MM-DD"),
+            paymentDue: moment(value, "YYYY-MM-DD")
+              .add(prevState.paymentTerms, "d")
+              .format("YYYY-MM-DD"),
           }
         : id === "paymentterm"
         ? {

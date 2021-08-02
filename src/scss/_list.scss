@@ -1,12 +1,10 @@
 .list__link {
   &__button {
-    width: 48rem;
-    height: 5rem;
+    @include hw(5rem, 48rem);
     @include noborderoutline();
     box-shadow: -2px 1px 16px -2px rgba(0, 0, 0, 0.75);
     border-radius: 5px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    @include gridContainer(repeat(5, 1fr), initial, initial);
     align-items: center;
     background-color: white;
     border: 1px solid white;
@@ -15,10 +13,7 @@
     transition: border 0.2s ease;
     &--status {
       width: 8rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
+      @include flexContainer(row, center, center);
       &-paid {
         background-color: rgba(51, 214, 159, 0.2);
         color: rgb(51, 214, 159);
@@ -32,8 +27,7 @@
         background-color: #f3f3f5;
       }
       &--bullet {
-        width: 0.5rem;
-        height: 0.5rem;
+        @include hw(0.5rem, 0.5rem);
         border-radius: 100%;
         margin-right: 0.5rem;
         &-paid {
@@ -54,8 +48,7 @@
 
   @media (max-width: 856px) {
     &__button {
-      height: 9rem;
-      width: clamp(300px, 90vw, 48rem);
+      @include hw(9rem, clamp(300px, 90vw, 48rem));
       margin: 0 auto 2rem auto;
       grid-template-columns: repeat(2, 1fr);
       align-items: center;
@@ -69,24 +62,19 @@
         margin-bottom: 0;
       }
       &--header {
-        grid-column: 1;
-        grid-row: 1;
+        @include gridPosition(1, 1);
       }
       &--due {
-        grid-column: 1;
-        grid-row: 2;
+        @include gridPosition(1, 2);
       }
       &--total {
-        grid-column: 1;
-        grid-row: 3;
+        @include gridPosition(1, 3);
       }
       &--client {
-        grid-column: 2;
-        grid-row: 1;
+        @include gridPosition(2, 1);
       }
       &--status {
-        grid-column: 2;
-        grid-row: 2;
+        @include gridPosition(2, 2);
         width: 9rem;
         justify-self: center;
       }

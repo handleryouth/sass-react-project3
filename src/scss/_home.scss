@@ -9,9 +9,7 @@
       @include flexContainer(column, flex-start, flex-start);
     }
     &__command {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flexContainer(row, center, center);
       position: relative;
       @media (max-width: 558px) {
         width: 100%;
@@ -19,12 +17,10 @@
       }
 
       &__filter {
-        display: flex;
-        align-items: center;
+        @include flexContainer(row, center, initial);
       }
       &__status {
-        display: flex;
-        align-items: center;
+        @include flexContainer(row, center, initial);
         cursor: pointer;
         img {
           margin-left: 2rem;
@@ -50,27 +46,24 @@
       }
       &__button {
         button {
-          cursor: pointer;
           @include noborderoutline;
+          @include hw(3.5rem, 9.5rem);
+          cursor: pointer;
           background-color: rgb(124, 93, 250);
           margin-left: 2rem;
-          height: 3.5rem;
-          width: 9.5rem;
           color: white;
           border-radius: 2rem;
 
           @media (max-width: 856px) {
-            display: flex;
-            align-items: center;
+            @include flexContainer(row, center, initial);
             height: 3rem;
           }
 
           span {
-            padding: 0.6rem 0.8rem;
+            @include paddingmargin(0.6rem 0.8rem, 0 1rem 0 0);
             border-radius: 100%;
             background-color: white;
             color: rgb(124, 93, 250);
-            margin-right: 1rem;
             @media (max-width: 856px) {
               padding: clamp(0.1rem, 5vw, 0.6rem) clamp(0.35rem, 5vw, 0.8rem);
             }

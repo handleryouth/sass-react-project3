@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import moment from "moment";
 import { v4 as uuidv4 } from "uuid";
 import { variable } from "../App";
 
@@ -8,6 +9,7 @@ export default function Edit(props) {
   const editTemplate = { ...i };
   const [item, setItem] = useState(i.items);
   const [editList, setEditList] = useState(editTemplate);
+  console.log(editList);
 
   useEffect(() => {
     setEditList((prevState) => ({
@@ -76,11 +78,6 @@ export default function Edit(props) {
             ...prevState,
             clientEmail: event.value,
           }
-        : event.id === "createdAt"
-        ? {
-            ...prevState,
-            createdAt: event.value,
-          }
         : event.id === "description"
         ? {
             ...prevState,
@@ -89,12 +86,20 @@ export default function Edit(props) {
         : event.id === "createdAt"
         ? {
             ...prevState,
-            createdAt: event.value.toString(),
+            createdAt: event.value,
+            paymentDue: moment(event.value, "YYYY-MM-DD")
+              .add(prevState.paymentTerms, "d")
+              .format("YYYY-MM-DD"),
           }
-        : event.id === "netvalue"
+        : event.id === "paymentterms"
         ? {
             ...prevState,
             paymentTerms: parseInt(event.value),
+            paymentDue:
+              prevState.createdAt !== "" &&
+              moment(prevState.createdAt, "YYYY-MM-DD")
+                .add(parseInt(event.value), "d")
+                .format("YYYY-MM-DD"),
           }
         : ""
     );
@@ -149,6 +154,7 @@ export default function Edit(props) {
         x.id === id ? { ...x, editList, status: "pending", items: item } : x
       )
     );
+    setEdit(false);
   }
 
   function HandleCancel() {
@@ -185,7 +191,6 @@ export default function Edit(props) {
               type="text"
               id="streetFrom"
               value={editList.senderAddress.street}
-              required
             />
           </div>
 
@@ -198,7 +203,6 @@ export default function Edit(props) {
                 type="text"
                 id="cityFrom"
                 value={editList.senderAddress.city}
-                required
               />
             </div>
 
@@ -210,7 +214,6 @@ export default function Edit(props) {
                 type="text"
                 id="postCodeFrom"
                 value={editList.senderAddress.postCode}
-                required
               />
             </div>
 
@@ -222,7 +225,6 @@ export default function Edit(props) {
                 type="text"
                 id="countryFrom"
                 value={editList.senderAddress.country}
-                required
               />
             </div>
           </div>
@@ -239,7 +241,6 @@ export default function Edit(props) {
               type="text"
               id="clientName"
               value={editList.clientName}
-              required
             />
           </div>
 
@@ -251,7 +252,6 @@ export default function Edit(props) {
               type="text"
               id="clientEmail"
               value={editList.clientEmail}
-              required
             />
           </div>
 
@@ -263,7 +263,6 @@ export default function Edit(props) {
               type="text"
               id="streetTo"
               value={editList.clientAddress.street}
-              required
             />
           </div>
 
@@ -276,7 +275,6 @@ export default function Edit(props) {
                 type="text"
                 id="cityTo"
                 value={editList.clientAddress.city}
-                required
               />
             </div>
 
@@ -288,7 +286,6 @@ export default function Edit(props) {
                 type="text"
                 id="postCodeTo"
                 value={editList.clientAddress.postCode}
-                required
               />
             </div>
 
@@ -300,7 +297,6 @@ export default function Edit(props) {
                 type="text"
                 id="countryTo"
                 value={editList.clientAddress.country}
-                required
               />
             </div>
           </div>
@@ -314,16 +310,15 @@ export default function Edit(props) {
                 type="date"
                 id="createdAt"
                 value={editList.createdAt}
-                required
               />
             </div>
 
             <div className="create__input__date__paymentterm">
-              <label htmlFor="netvalue">Payment Terms</label>
+              <label htmlFor="paymentterms">Payment Terms</label>
               <select
                 style={darkTheme ? darkInput : null}
                 onChange={(e) => HandleChangeTo(e.target)}
-                id="netvalue"
+                id="paymentterms"
               >
                 <option value="1day">Net 1 Day</option>
                 <option value="7days">Net 7 Days</option>
@@ -341,7 +336,6 @@ export default function Edit(props) {
               type="text"
               id="description"
               value={editList.description}
-              required
             />
           </div>
         </div>
@@ -380,7 +374,6 @@ export default function Edit(props) {
                           type="text"
                           name="name"
                           value={x.name}
-                          required
                         />
                       </td>
                       <td className="create__itemlist__table__quantity">
@@ -397,7 +390,6 @@ export default function Edit(props) {
                           type="number"
                           name="quantity"
                           value={x.quantity}
-                          required
                         />
                       </td>
                       <td className="create__itemlist__table__price">
@@ -414,7 +406,6 @@ export default function Edit(props) {
                           type="number"
                           name="price"
                           value={x.price}
-                          required
                         />
                       </td>
                       <td className="create__itemlist__table__total">

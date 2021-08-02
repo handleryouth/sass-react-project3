@@ -8,10 +8,9 @@
   }
 
   &__backdrop {
+    @include hw(100vh, 100vw);
     background-color: black;
     opacity: 0;
-    width: 100vw;
-    height: 100vh;
     position: fixed;
     z-index: -1;
 

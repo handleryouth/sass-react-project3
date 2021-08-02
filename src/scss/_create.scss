@@ -1,13 +1,12 @@
 .create {
+  @include hw(100%, clamp(46rem, 78vw, 70rem));
   position: fixed;
   background-color: white;
   z-index: 3;
-  width: clamp(46rem, 78vw, 70rem);
   left: -70rem;
   padding: 1rem;
   transition: transform 0.8s ease;
   min-height: 100vh;
-  height: 100%;
   overflow-y: auto;
 
   h3 {
@@ -37,9 +36,8 @@
   }
 
   &__input {
-    display: flex;
+    @include flexContainer(column, initial, initial);
     width: 90%;
-    flex-direction: column;
     overflow-y: scroll;
     overflow-x: auto;
 
@@ -49,8 +47,7 @@
     &__clientname,
     &__clientemail,
     &__clientstreet {
-      display: flex;
-      flex-direction: column;
+      @include flexContainer(column, initial, initial);
       margin-bottom: 2rem;
       input {
         width: clamp(38rem, 66vw, 59rem);
@@ -60,14 +57,12 @@
       }
     }
     &__detail {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      @include gridContainer(repeat(3, 1fr), initial, initial);
       @media (max-width: 852px) {
         grid-template-columns: repeat(auto-fit, 20rem);
       }
       &__child {
-        display: flex;
-        flex-direction: column;
+        @include flexContainer(column, initial, initial);
         @media (max-width: 852px) {
           margin-top: 2rem;
         }
@@ -87,17 +82,14 @@
       }
     }
     &__date {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 2rem;
+      @include gridContainer(repeat(2, 1fr), 2rem, initial);
       margin-bottom: 2rem;
       @media (max-width: 852px) {
         grid-template-columns: repeat(auto-fit, 15rem);
       }
       &__invoicedate,
       &__paymentterm {
-        display: flex;
-        flex-direction: column;
+        @include flexContainer(column, initial, initial);
         input,
         select {
           width: clamp(16rem, 31vw, 29rem);
@@ -108,8 +100,7 @@
       }
     }
     &__description {
-      display: flex;
-      flex-direction: column;
+      @include flexContainer(column, initial, initial);
       input {
         width: clamp(38rem, 66vw, 59rem);
         @media (max-width: 856px) {
@@ -121,12 +112,11 @@
       font-weight: bolder;
       min-width: 4rem;
       cursor: pointer;
-      padding: 1rem 0;
+      @include paddingmargin(1rem 0, 0.8rem auto 0 auto);
       max-width: 881px;
       width: 90%;
       min-width: 254px;
       color: rgb(126, 136, 195);
-      margin: 0.8rem auto 0 auto;
       @include noborderoutline;
       border-radius: 2rem;
       transition: background-color 0.2s ease;
@@ -137,14 +127,10 @@
   }
 
   &__command {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @include flexContainer(row, center, space-between);
     height: 22rem;
     @media (max-width: 530px) {
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      @include flexContainer(column, center, center);
     }
     &__discard {
       @include noborderoutline;
@@ -152,21 +138,18 @@
       font-weight: bolder;
       color: rgb(126, 136, 195);
       background-color: rgba(126, 136, 195, 0.3);
-      width: 7rem;
-      height: 3rem;
+      @include hw(3rem, 7rem);
       cursor: pointer;
     }
     &__save {
-      display: flex;
-      align-items: center;
+      @include flexContainer(row, center, initial);
       @media (max-width: 530px) {
         margin-top: 2rem;
       }
       button {
         @extend .create__command__discard;
         margin: 0 0 0 1rem;
-        width: 9rem;
-        height: 3rem;
+        @include hw(3rem, 9rem);
         cursor: pointer;
       }
       &__draft {
