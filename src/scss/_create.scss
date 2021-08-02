@@ -1,7 +1,7 @@
 .create {
   position: fixed;
   background-color: white;
-  z-index: 2;
+  z-index: 3;
   width: clamp(46rem, 78vw, 70rem);
   left: -70rem;
   padding: 1rem;
@@ -120,10 +120,12 @@
       font-weight: bolder;
       min-width: 4rem;
       cursor: pointer;
-      height: 2.7rem;
+      padding: 1rem 0;
+      max-width: 881px;
       width: 90%;
+      min-width: 254px;
       color: rgb(126, 136, 195);
-      margin: 0 auto;
+      margin: 0.8rem auto 0 auto;
       @include noborderoutline;
       border-radius: 2rem;
       transition: background-color 0.2s ease;
@@ -179,19 +181,30 @@
     &__table {
       width: 100%;
       &__itemname {
-        width: clamp(11rem, 28vw, 25rem);
+        input {
+          width: clamp(11rem, 28vw, 25rem);
+        }
       }
       &__quantity {
-        width: 9rem;
+        input {
+          width: 5rem;
+        }
       }
       &__price {
-        width: 7rem;
+        input {
+          width: 5rem;
+        }
       }
       &__total {
-        width: 8rem;
+        p {
+          width: clamp(11rem, 15vw, 15rem);
+        }
       }
       &__delete {
-        width: 7rem;
+        img {
+          width: 1.5rem;
+          margin-right: clamp(0.3rem, 4vw, 2rem);
+        }
       }
     }
   }

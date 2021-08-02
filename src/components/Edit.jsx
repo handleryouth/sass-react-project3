@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Edit(props) {
-  const { title, setList, setEdit, ...i } = props;
+  const { title, setList, setEdit, edit, ...i } = props;
   const editTemplate = { ...i };
   const [item, setItem] = useState(i.items);
   const [editList, setEditList] = useState(editTemplate);
@@ -154,18 +154,21 @@ export default function Edit(props) {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <div>
+    <form
+      onSubmit={(e) => e.preventDefault()}
+      className={`create ${edit ? "create__triggered" : ""}`}
+    >
+      <div className="create__header">
         <h1>
           {title}#{i.id}
         </h1>
       </div>
 
-      <div>
+      <div className="create__input">
         <div>
           <h3>bill From</h3>
 
-          <div>
+          <div className="create__input__streetfrom">
             <label htmlFor="streetFrom">Street Address</label>
             <input
               onChange={(e) => HandleChangeFrom(e.target)}
@@ -176,8 +179,8 @@ export default function Edit(props) {
             />
           </div>
 
-          <div>
-            <div>
+          <div className="create__input__detail">
+            <div className="create__input__detail__child">
               <label htmlFor="cityFrom">City</label>
               <input
                 onChange={(e) => HandleChangeFrom(e.target)}
@@ -188,7 +191,7 @@ export default function Edit(props) {
               />
             </div>
 
-            <div>
+            <div className="create__input__detail__child">
               <label htmlFor="postcodeFrom">Post Code</label>
               <input
                 onChange={(e) => HandleChangeFrom(e.target)}
@@ -199,7 +202,7 @@ export default function Edit(props) {
               />
             </div>
 
-            <div>
+            <div className="create__input__detail__child">
               <label htmlFor="countryFrom">Country</label>
               <input
                 onChange={(e) => HandleChangeFrom(e.target)}
@@ -215,7 +218,7 @@ export default function Edit(props) {
         <div>
           <h3>Bill To</h3>
 
-          <div>
+          <div className="create__input__clientname">
             <label htmlFor="clientName">Client's Name</label>
             <input
               onChange={(e) => HandleChangeTo(e.target)}
@@ -226,7 +229,7 @@ export default function Edit(props) {
             />
           </div>
 
-          <div>
+          <div className="create__input__clientemail">
             <label htmlFor="clientEmail">Client's Email</label>
             <input
               onChange={(e) => HandleChangeTo(e.target)}
@@ -237,7 +240,7 @@ export default function Edit(props) {
             />
           </div>
 
-          <div>
+          <div className="create__input__clientstreet">
             <label htmlFor="streetTo">Street Address</label>
             <input
               onChange={(e) => HandleChangeTo(e.target)}
@@ -248,8 +251,8 @@ export default function Edit(props) {
             />
           </div>
 
-          <div>
-            <div>
+          <div className="create__input__clientdetail">
+            <div className="create__input__clientdetail__child">
               <label htmlFor="cityTo">City</label>
               <input
                 onChange={(e) => HandleChangeTo(e.target)}
@@ -260,7 +263,7 @@ export default function Edit(props) {
               />
             </div>
 
-            <div>
+            <div className="create__input__clientdetail__child">
               <label htmlFor="postCodeTo">Post Code</label>
               <input
                 onChange={(e) => HandleChangeTo(e.target)}
@@ -271,7 +274,7 @@ export default function Edit(props) {
               />
             </div>
 
-            <div>
+            <div className="create__input__clientdetail__child">
               <label htmlFor="countryTo">Country</label>
               <input
                 onChange={(e) => HandleChangeTo(e.target)}
@@ -283,8 +286,8 @@ export default function Edit(props) {
             </div>
           </div>
 
-          <div>
-            <div>
+          <div className="create__input__date">
+            <div className="create__input__date__invoicedate">
               <label htmlFor="createdAt">Invoice Date</label>
               <input
                 onChange={(e) => HandleChangeTo(e.target)}
@@ -295,7 +298,7 @@ export default function Edit(props) {
               />
             </div>
 
-            <div>
+            <div className="create__input__date__paymentterm">
               <label htmlFor="netvalue">Payment Terms</label>
               <select onChange={(e) => HandleChangeTo(e.target)} id="netvalue">
                 <option value="1day">Net 1 Day</option>
@@ -306,7 +309,7 @@ export default function Edit(props) {
             </div>
           </div>
 
-          <div>
+          <div className="create__input__description">
             <label htmlFor="description">Description</label>
             <input
               onChange={(e) => HandleChangeTo(e.target)}
@@ -318,26 +321,29 @@ export default function Edit(props) {
           </div>
         </div>
 
-        <div>
+        <div className="create__itemlist">
           <h3>ItemList</h3>
           <div>
-            <table>
-              <thead>
-                <tr>
-                  <td>Item Name</td>
-                  <td>Qty</td>
-                  <td>Price</td>
-                  <td>Total</td>
-                  <td></td>
-                </tr>
-              </thead>
+            <table className="create__itemlist__table">
+              {item.length > 0 && (
+                <thead>
+                  <tr>
+                    <td>Item Name</td>
+                    <td>Qty</td>
+                    <td>Price</td>
+                    <td>Total</td>
+                    <td></td>
+                  </tr>
+                </thead>
+              )}
 
               <tbody>
                 {item.map((x, index) => {
                   return (
                     <tr key={index}>
-                      <td>
+                      <td className="create__itemlist__table__itemname">
                         <input
+                          
                           onChange={(e) =>
                             HandleItems(
                               e.target.value,
@@ -352,7 +358,7 @@ export default function Edit(props) {
                           required
                         />
                       </td>
-                      <td>
+                      <td className="create__itemlist__table__quantity">
                         <input
                           onChange={(e) =>
                             HandleItems(
@@ -368,8 +374,9 @@ export default function Edit(props) {
                           required
                         />
                       </td>
-                      <td>
+                      <td className="create__itemlist__table__price">
                         <input
+                          
                           onChange={(e) =>
                             HandleItems(
                               e.target.value,
@@ -384,16 +391,16 @@ export default function Edit(props) {
                           required
                         />
                       </td>
-                      <td>
+                      <td className="create__itemlist__table__total">
                         <p>{x.total}</p>
                       </td>
-                      <td>
-                        <button
-                          id={x.id}
+                      <td className="create__itemlist__table__delete">
+                        <img
                           onClick={(e) => HandleDeleteItem(e.target.id)}
-                        >
-                          Delete
-                        </button>
+                          id={x.id}
+                          src="/images/icon-delete.svg"
+                          alt="Delete Command"
+                        />
                       </td>
                     </tr>
                   );
@@ -403,21 +410,31 @@ export default function Edit(props) {
           </div>
         </div>
 
-        <button onClick={HandleChangeItem}> + Add New Item</button>
+        <button className="create__input__additem" onClick={HandleChangeItem}>
+          {" "}
+          + Add New Item
+        </button>
       </div>
 
-      <div>
-        <button type="reset" onClick={() => HandleCancel()}>
+      <div className="create__command">
+        <button
+          className="create__command__discard"
+          type="reset"
+          onClick={() => HandleCancel()}
+        >
           Cancel
         </button>
-        <button
-          id={i.id}
-          onClick={(e) => {
-            HandleSaveChanges(e.target.id);
-          }}
-        >
-          Save Changes
-        </button>
+        <div className="create__command__save">
+          <button
+            className="create__command__save__changes"
+            id={i.id}
+            onClick={(e) => {
+              HandleSaveChanges(e.target.id);
+            }}
+          >
+            Save Changes
+          </button>
+        </div>
       </div>
     </form>
   );

@@ -23,15 +23,20 @@ export default function Detail() {
   return selectedData.map((i) => {
     return (
       <div key={i.id} className="app-detail">
-        <aside style={edit ? { display: "block" } : { display: "none" }}>
+        <aside>
           <Edit
             {...i}
             key={i.id}
             title="Edit"
             setList={setList}
             setEdit={setEdit}
+            edit={edit}
           />
         </aside>
+
+        <div
+          className={`app__backdrop ${edit ? "app__backdrop__triggered" : ""}`}
+        ></div>
 
         <div key={i.id} className="detail">
           <Link to="/">

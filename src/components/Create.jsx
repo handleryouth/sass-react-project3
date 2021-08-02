@@ -150,6 +150,10 @@ export default function Edit({ setList, setCreate, create }) {
     setCreate(false);
   }
 
+  function HandleDeleteItem(id) {
+    setItemList((prevState) => prevState.filter((x) => x.id !== id));
+  }
+
   return (
     <form
       onSubmit={(e) => e.preventDefault()}
@@ -315,9 +319,8 @@ export default function Edit({ setList, setCreate, create }) {
                 {itemList.map((x) => {
                   return (
                     <tr key={x.id}>
-                      <td>
+                      <td className="create__itemlist__table__itemname">
                         <input
-                          className="create__itemlist__table__itemname"
                           id={x.id}
                           type="text"
                           name="name"
@@ -331,9 +334,8 @@ export default function Edit({ setList, setCreate, create }) {
                           }
                         />
                       </td>
-                      <td>
+                      <td className="create__itemlist__table__quantity">
                         <input
-                          className="create__itemlist__table__quantity"
                           id={x.id}
                           type="number"
                           name="quantity"
@@ -347,9 +349,8 @@ export default function Edit({ setList, setCreate, create }) {
                           }
                         />
                       </td>
-                      <td>
+                      <td className="create__itemlist__table__price">
                         <input
-                          className="create__itemlist__table__price"
                           id={x.id}
                           type="number"
                           name="price"
@@ -369,6 +370,8 @@ export default function Edit({ setList, setCreate, create }) {
 
                       <td className="create__itemlist__table__delete">
                         <img
+                          onClick={(e) => HandleDeleteItem(e.target.id)}
+                          id={x.id}
                           src="/images/icon-delete.svg"
                           alt="Delete Command"
                         />
