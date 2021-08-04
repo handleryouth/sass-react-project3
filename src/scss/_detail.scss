@@ -14,8 +14,8 @@
     @include flexContainer(row, center, space-between);
     padding: 2rem 1rem;
     box-shadow: -2px -1px 13px -1px rgba(0, 0, 0, 0.54);
-    @media (max-width: 478px) {
-      @include flexContainer(column, flex-start, flex-start);
+    @media (max-width: 646px) {
+      @include flexContainer(column, center, flex-start);
     }
 
     &__status {
@@ -65,6 +65,9 @@
 
     &__array {
       position: relative;
+      @media (max-width: 646px){
+        margin-top: 1rem;
+      }
       @media (max-width: 478px) {
         width: 100%;
         @include flexContainer(column, center, flex-start);
@@ -87,6 +90,9 @@
       &__mark {
         width: 8rem;
         background-color: rgb(124, 93, 250);
+        @media (max-width: 478px){
+          margin-top: 1rem;
+        }
       }
 
       &__delete {
