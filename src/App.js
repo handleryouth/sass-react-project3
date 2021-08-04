@@ -20,7 +20,7 @@ export default function App() {
     const invoicelistJSON = localStorage.getItem(INVOICELIST);
     const darkThemeJSON = localStorage.getItem(THEME);
     invoicelistJSON != null && setList(JSON.parse(invoicelistJSON));
-    darkThemeJSON != null && setList(JSON.parse(darkThemeJSON));
+    darkThemeJSON != null && setDarkTheme(JSON.parse(darkThemeJSON));
   }, []);
 
   useEffect(() => {
