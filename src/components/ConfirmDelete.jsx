@@ -13,18 +13,18 @@ export default function ConfirmDelete({ id, setList, setApprove }) {
     history.push(`/invoice/${id}`);
   }
   return (
-    <>
+    <div className="detail__command__array__confirmation__container">
       <h1>Confirm Delete</h1>
       <p>
         Are you sure you want to delete invoice {id}? This action cannot be
         undone.
       </p>
       <div>
-        <button onClick={Cancel}>Cancel</button>
-        <button id={id} onClick={(e) => HandleDelete(e.target.id)}>
+        <button className="detail__command__array__confirmation__container__cancel" onClick={Cancel}>Cancel</button>
+        <button className="detail__command__array__confirmation__container__delete"  id={id} onClick={(e) => HandleDelete(e.target.id)}>
           Delete
         </button>
       </div>
-    </>
+    </div>
   );
 }

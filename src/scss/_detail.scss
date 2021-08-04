@@ -27,7 +27,7 @@
       }
       &__container {
         @include flexContainer(row, center, center);
-        @include hw(2.5rem, 7rem );
+        @include hw(2.5rem, 7rem);
         background-color: yellow;
         border-radius: 5px;
         @include paddingmargin(0 0.5rem, 0 0 0 2rem);
@@ -39,9 +39,9 @@
           background-color: rgba(51, 214, 159, 0.2);
           color: rgb(51, 214, 159);
         }
-        &-draft{
+        &-draft {
           color: rgb(55, 59, 83);
-          background-color: #F3F3F5;
+          background-color: #f3f3f5;
         }
 
         &--bullet {
@@ -54,7 +54,7 @@
             background-color: rgb(255, 143, 0);
           }
           &-draft {
-            background-color: rgb(55, 59, 83); 
+            background-color: rgb(55, 59, 83);
           }
         }
         &--description {
@@ -93,13 +93,38 @@
         background-color: rgb(236, 87, 87);
       }
       &__confirmation {
+        @include hw(100vh, 100vw);
+        min-width: 320px;
+        @include flexContainer(row, center, center);
         position: fixed;
-        background-color: white;
-        padding: 2rem;
-        width: 30rem;
-        left: 33vw;
-        top: 15vw;
-        z-index: 1;
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.54);
+
+        &__container {
+          padding: clamp(1rem, 3vw, 2rem);
+          width: clamp(320px, 37vw, 30rem);
+          background-color: white;
+          button {
+            @include noborderoutline;
+            @include hw(2.5rem, 5.5rem);
+            margin-right: 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+          }
+          h1 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+          }
+          p {
+            width: clamp(288px, 24vw, 416px);
+          }
+          &__cancel {
+            background-color: rgb(124, 93, 250);
+          }
+          &__delete {
+            background-color: rgb(236, 87, 87);
+          }
+        }
       }
       &__edit,
       &__delete {
@@ -156,7 +181,7 @@
     }
 
     &__grid-2-3 {
-      @include gridSpecificPosition(3, initial,  2, 4);
+      @include gridSpecificPosition(3, initial, 2, 4);
       @media (max-width: 645px) {
         @include gridPosition(1, 5);
       }

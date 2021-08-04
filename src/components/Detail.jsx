@@ -22,7 +22,11 @@ export default function Detail() {
 
   return selectedData.map((i) => {
     return (
-      <div style={darkTheme ? {backgroundColor: "#141625"} : null} key={i.id} className="app-detail">
+      <div
+        style={darkTheme ? { backgroundColor: "#141625" } : null}
+        key={i.id}
+        className="app-detail"
+      >
         <aside>
           <Edit
             {...i}
@@ -42,13 +46,16 @@ export default function Detail() {
           <Link to="/">
             <div className="detail__back">
               <img src="/images/icon-arrow-left.svg" alt="Back" />
-              <p style={darkTheme ? {color: "white"} : null}>Go Back</p>
+              <p style={darkTheme ? { color: "white" } : null}>Go Back</p>
             </div>
           </Link>
 
-          <div style={darkTheme ? {backgroundColor: "rgb(30, 33, 57)"} : null} className="detail__command">
+          <div
+            style={darkTheme ? { backgroundColor: "rgb(30, 33, 57)" } : null}
+            className="detail__command"
+          >
             <div className="detail__command__status">
-              <p style={darkTheme ? {color: "white"} : null}>Status</p>
+              <p style={darkTheme ? { color: "white" } : null}>Status</p>
               <div
                 className={`detail__command__status__container detail__command__status__container-${
                   i.status === "paid"
@@ -83,7 +90,9 @@ export default function Detail() {
               <button
                 className="detail__command__array__delete"
                 id={i.id}
-                onClick={() => setApprove(true)}
+                onClick={() => {
+                  setApprove(true);
+                }}
               >
                 Delete
               </button>
@@ -102,7 +111,7 @@ export default function Detail() {
               )}
 
               <div
-                style={approve ? { display: "block" } : { display: "none" }}
+                style={approve ? null : { display: "none" }}
                 className="detail__command__array__confirmation"
               >
                 <ConfirmDelete
@@ -115,7 +124,14 @@ export default function Detail() {
           </div>
 
           {/* batas pertama */}
-          <div style={darkTheme ? {backgroundColor: "rgb(30, 33, 57)", color: "white"} : null} className="detail__info">
+          <div
+            style={
+              darkTheme
+                ? { backgroundColor: "rgb(30, 33, 57)", color: "white" }
+                : null
+            }
+            className="detail__info"
+          >
             <div className="detail__info__grid-1-1">
               <h2>#{id}</h2>
               <p>{i.description}</p>
