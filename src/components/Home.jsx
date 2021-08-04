@@ -63,7 +63,9 @@ export default function Home() {
               <div
                 style={
                   status
-                    ? { display: "block", backgroundColor: "#141625" }
+                    ? darkTheme
+                      ? { display: "block", backgroundColor: "#141625" }
+                      : null
                     : { display: "none" }
                 }
                 className="home__title__command__checkbox"
